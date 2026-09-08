@@ -1,0 +1,47 @@
+name: 添加日历事件
+description: 提交后自动同步到 Semester 1 日历
+title: "[日历] "
+body:
+  - type: input
+    id: event-title
+    attributes:
+      label: 事件名称
+      placeholder: 小组汇报
+    validations:
+      required: true
+  - type: input
+    id: date
+    attributes:
+      label: 日期
+      description: YYYY-MM-DD
+      placeholder: "2026-10-15"
+    validations:
+      required: true
+  - type: input
+    id: start
+    attributes:
+      label: 开始时间
+      description: HH:MM；全天事件填写“全天”
+      placeholder: "14:00"
+    validations:
+      required: true
+  - type: input
+    id: end
+    attributes:
+      label: 结束时间
+      description: HH:MM；全天事件填写“全天”
+      placeholder: "15:00"
+    validations:
+      required: true
+  - type: dropdown
+    id: category
+    attributes:
+      label: 分类
+      options: [个人, 截止日期, 学习]
+    validations:
+      required: true
+  - type: textarea
+    id: notes
+    attributes:
+      label: 备注
+      placeholder: 地点、准备事项等

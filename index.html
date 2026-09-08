@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="zh-Hans">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#8f1838">
+  <meta name="description" content="PolyU DAI 2026/27 Semester 1 课程与个人日历">
+  <title>Semester 1 · 我的课程日历</title>
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">
+      <div class="brand-mark" aria-hidden="true">理</div>
+      <div>
+        <p class="eyebrow">POLYU · DAI 2026/27</p>
+        <h1>Semester 1</h1>
+      </div>
+    </div>
+    <button class="add-button" id="openAdd" type="button"><span aria-hidden="true">＋</span> 添加事件</button>
+  </header>
+
+  <main>
+    <section class="summary" aria-label="学期概览">
+      <div>
+        <p class="date-range">2026.09.01 — 11.24</p>
+        <h2>我的课程日历</h2>
+        <p class="lede">两门必修，一门选修。课程安排、个人事件与手机端保持同步。</p>
+      </div>
+      <div class="stats">
+        <div><strong id="courseCount">23</strong><span>课程日</span></div>
+        <div><strong>13</strong><span>教学周</span></div>
+        <div><strong>3</strong><span>修读科目</span></div>
+      </div>
+    </section>
+
+    <section class="controls" aria-label="日历控制">
+      <div class="month-nav">
+        <button id="prevMonth" class="icon-button" type="button" aria-label="上一个月">‹</button>
+        <button id="monthTitle" class="month-title" type="button" aria-label="回到当前学期月份"></button>
+        <button id="nextMonth" class="icon-button" type="button" aria-label="下一个月">›</button>
+      </div>
+      <div class="view-switch" role="group" aria-label="视图选择">
+        <button class="active" data-view="month" type="button">月历</button>
+        <button data-view="agenda" type="button">日程</button>
+      </div>
+    </section>
+
+    <section class="calendar-shell">
+      <div id="syncStatus" class="sync-status" role="status"><span></span> 正在读取共享日历…</div>
+      <div id="monthView" class="month-view">
+        <div class="weekdays" aria-hidden="true">
+          <span>一</span><span>二</span><span>三</span><span>四</span><span>五</span><span>六</span><span>日</span>
+        </div>
+        <div id="calendarGrid" class="calendar-grid"></div>
+      </div>
+      <div id="agendaView" class="agenda-view" hidden></div>
+    </section>
+
+    <section class="course-key" aria-label="课程图例">
+      <article class="course-card cms6001">
+        <span class="course-dot"></span>
+        <div><strong>CMS6001</strong><p>Advanced AI Programming · 周六</p></div>
+      </article>
+      <article class="course-card cms6002">
+        <span class="course-dot"></span>
+        <div><strong>CMS6002</strong><p>Frontiers of Artificial Intelligence · 周日</p></div>
+      </article>
+      <article class="course-card comp6704">
+        <span class="course-dot"></span>
+        <div><strong>COMP6704</strong><p>Advanced Topics in Optimization · 周二晚</p></div>
+      </article>
+    </section>
+  </main>
+
+  <dialog id="eventDialog">
+    <form id="eventForm" method="dialog">
+      <div class="dialog-head">
+        <div><p class="eyebrow">SYNCED EVENT</p><h2>添加个人事件</h2></div>
+        <button id="closeDialog" class="icon-button" type="button" aria-label="关闭">×</button>
+      </div>
+      <p class="form-note">提交后会打开 GitHub。确认创建事件请求后，约 1 分钟内自动同步到桌面与手机端。</p>
+      <label>事件名称<input name="title" required maxlength="80" placeholder="例如：小组汇报"></label>
+      <div class="form-row">
+        <label>日期<input name="date" type="date" required min="2026-09-01" max="2026-12-31"></label>
+        <label>分类<select name="category"><option value="personal">个人</option><option value="deadline">截止日期</option><option value="study">学习</option></select></label>
+      </div>
+      <div class="form-row">
+        <label>开始时间<input name="start" type="time"></label>
+        <label>结束时间<input name="end" type="time"></label>
+      </div>
+      <label>备注<textarea name="notes" rows="3" maxlength="300" placeholder="地点、准备事项等（选填）"></textarea></label>
+      <button class="submit-button" type="submit">前往 GitHub 确认添加</button>
+    </form>
+  </dialog>
+
+  <template id="eventTemplate">
+    <button class="event-pill" type="button"><span class="event-time"></span><span class="event-title"></span></button>
+  </template>
+
+  <script src="config.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

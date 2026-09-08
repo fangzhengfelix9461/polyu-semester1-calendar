@@ -1,0 +1,50 @@
+name: Add calendar event
+on:
+  issues:
+    types: [opened]
+permissions:
+  contents: write
+  issues: write
+jobs:
+  add-event:
+    if: startsWith(github.event.issue.title, '[日历]')
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Parse issue and update events
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            const body = context.payload.issue.body || '';
+            const read = (heading) => {
+              const escaped = heading.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+              const match = body.match(new RegExp(`### ${escaped}\\s*\\n+([^#]+?)(?=\\n+###|$)`));
+              return match ? match[1].trim() : '';
+            };
+            const title = read('事件名称');
+            const date = read('日期');
+            const rawStart = read('开始时间');
+            const rawEnd = read('结束时间');
+            const categoryMap = { '个人': 'personal', '截止日期': 'deadline', '学习': 'study' };
+            const category = categoryMap[read('分类')] || 'personal';
+            const notes = read('备注') === '_No response_' ? '' : read('备注');
+            if (!title || !/^2026-\d{2}-\d{2}$/.test(date)) core.setFailed('事件名称或日期格式无效');
+            const time = value => value === '全天' ? '' : (/^\d{2}:\d{2}$/.test(value) ? value : '');
+            const events = JSON.parse(fs.readFileSync('events.json', 'utf8'));
+            events.push({ id: `event-${context.payload.issue.number}`, date, title, start: time(rawStart), end: time(rawEnd), category, details: notes });
+            events.sort((a,b) => `${a.date}${a.start}`.localeCompare(`${b.date}${b.start}`));
+            fs.writeFileSync('events.json', JSON.stringify(events, null, 2) + '\n');
+      - name: Commit shared calendar
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add events.json
+          git commit -m "Add calendar event from issue #${{ github.event.issue.number }}"
+          git push
+      - name: Close request
+        uses: actions/github-script@v7
+        with:
+          script: |
+            await github.rest.issues.createComment({ ...context.repo, issue_number: context.issue.number, body: '✅ 已加入共享日历。页面刷新后即可看到。' });
+            await github.rest.issues.update({ ...context.repo, issue_number: context.issue.number, state: 'closed' });

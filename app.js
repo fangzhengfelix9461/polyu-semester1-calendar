@@ -151,15 +151,18 @@
   el("eventForm").addEventListener("submit", event => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
+    const categoryNames = { personal: "个人", deadline: "截止日期", study: "学习" };
+    const issueBody = [
+      "### 事件名称", data.get("title"), "",
+      "### 日期", data.get("date"), "",
+      "### 开始时间", data.get("start") || "全天", "",
+      "### 结束时间", data.get("end") || "全天", "",
+      "### 分类", categoryNames[data.get("category")] || "个人", "",
+      "### 备注", data.get("notes") || "无"
+    ].join("\n");
     const params = new URLSearchParams({
-      template: "new-event.yml",
       title: `[日历] ${data.get("date")} ${data.get("title")}`,
-      "event-title": data.get("title"),
-      date: data.get("date"),
-      start: data.get("start") || "全天",
-      end: data.get("end") || "全天",
-      category: data.get("category"),
-      notes: data.get("notes") || "无"
+      body: issueBody
     });
     window.open(`https://github.com/${CONFIG.owner}/${CONFIG.repo}/issues/new?${params}`, "_blank", "noopener");
     el("eventDialog").close();

@@ -121,13 +121,15 @@
   async function syncEvents() {
     const status = el("syncStatus");
     const hosted = location.protocol.startsWith("http") && location.hostname.endsWith("github.io");
-    const url = hosted ? `events.json?t=${Date.now()}` : `https://raw.githubusercontent.com/${CONFIG.owner}/${CONFIG.repo}/${CONFIG.branch}/events.json?t=${Date.now()}`;
+    const stamp = Date.now();
+    const baseUrl = hosted ? `events.json?t=${stamp}` : `https://raw.githubusercontent.com/${CONFIG.owner}/${CONFIG.repo}/${CONFIG.branch}/events.json?t=${stamp}`;
+    const raUrl = hosted ? `ra-events.json?t=${stamp}` : `https://raw.githubusercontent.com/${CONFIG.owner}/${CONFIG.repo}/${CONFIG.branch}/ra-events.json?t=${stamp}`;
     try {
-      const response = await fetch(url, { cache: "no-store" });
-      if (!response.ok) throw new Error("not deployed");
-      const remote = await response.json();
-      if (!Array.isArray(remote)) throw new Error("invalid event data");
-      events = remote;
+      const [response, raResponse] = await Promise.all([fetch(baseUrl, { cache: "no-store" }), fetch(raUrl, { cache: "no-store" })]);
+      if (!response.ok || !raResponse.ok) throw new Error("not deployed");
+      const [remote, raEvents] = await Promise.all([response.json(), raResponse.json()]);
+      if (!Array.isArray(remote) || !Array.isArray(raEvents)) throw new Error("invalid event data");
+      events = [...remote, ...raEvents].sort((a, b) => `${a.date}${a.start}`.localeCompare(`${b.date}${b.start}`));
       status.className = "sync-status ok";
       status.innerHTML = `<span></span> 已同步 · ${new Date().toLocaleTimeString("zh-CN", {hour:"2-digit", minute:"2-digit"})}`;
       render();

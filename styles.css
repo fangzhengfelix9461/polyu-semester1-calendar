@@ -11,6 +11,8 @@
   --cms2-soft: #f8e4ea;
   --comp: #6d4fb3;
   --comp-soft: #eee9fb;
+  --eduhk: #28734f;
+  --eduhk-soft: #e2f3e9;
   --personal: #b56a12;
   --personal-soft: #fff0d9;
   font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
@@ -65,8 +67,9 @@ main { max-width: 1240px; margin: auto; padding: 34px 22px 60px; }
 .event-pill.cms6001 { color: var(--cms1); background: var(--cms1-soft); }
 .event-pill.cms6002 { color: var(--cms2); background: var(--cms2-soft); }
 .event-pill.comp6704 { color: var(--comp); background: var(--comp-soft); }
+.event-pill.eduhk { color: var(--eduhk); background: var(--eduhk-soft); }
 .event-pill.personal, .event-pill.study, .event-pill.deadline { color: var(--personal); background: var(--personal-soft); }
-.course-key { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-top: 16px; }
+.course-key { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-top: 16px; }
 .course-card { display: flex; gap: 12px; align-items: center; background: var(--white); border: 1px solid var(--line); border-radius: 14px; padding: 15px; }
 .course-dot { width: 11px; height: 36px; border-radius: 7px; flex: none; }
 .course-card strong { font-size: .86rem; }
@@ -74,6 +77,7 @@ main { max-width: 1240px; margin: auto; padding: 34px 22px 60px; }
 .course-card.cms6001 .course-dot { background: var(--cms1); }
 .course-card.cms6002 .course-dot { background: var(--cms2); }
 .course-card.comp6704 .course-dot { background: var(--comp); }
+.course-card.eduhk .course-dot { background: var(--eduhk); }
 .agenda-view { padding: 10px 22px 24px; }
 .agenda-day { display: grid; grid-template-columns: 95px 1fr; gap: 18px; padding: 18px 0; border-bottom: 1px solid var(--line); }
 .agenda-date strong { display: block; font: 700 1.45rem Georgia, serif; }
@@ -83,6 +87,7 @@ main { max-width: 1240px; margin: auto; padding: 34px 22px 60px; }
 .agenda-event.cms6001 { border-color: var(--cms1); }
 .agenda-event.cms6002 { border-color: var(--cms2); }
 .agenda-event.comp6704 { border-color: var(--comp); }
+.agenda-event.eduhk { border-color: var(--eduhk); }
 .agenda-event.personal, .agenda-event.study, .agenda-event.deadline { border-color: var(--personal); }
 .agenda-event strong { display: block; font-size: .87rem; }
 .agenda-event span { color: var(--muted); font-size: .76rem; }

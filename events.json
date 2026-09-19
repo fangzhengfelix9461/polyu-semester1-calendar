@@ -1,26 +1,227 @@
 [
-  { "id": "c6704-w1", "date": "2026-09-01", "title": "COMP6704", "start": "18:30", "end": "21:30", "category": "comp6704", "details": "Advanced Topics in Optimization · Week 1" },
-  { "id": "c6001-w1", "date": "2026-09-05", "title": "CMS6001", "start": "09:30", "end": "17:00", "category": "cms6001", "details": "Advanced AI Programming · Week 1 · 午休 12:30–14:00" },
-  { "id": "c6002-w1", "date": "2026-09-06", "title": "CMS6002", "start": "09:30", "end": "17:00", "category": "cms6002", "details": "Frontiers of Artificial Intelligence · Week 1 · 午休 12:30–14:00" },
-  { "id": "c6704-w2", "date": "2026-09-08", "title": "COMP6704", "start": "18:30", "end": "21:30", "category": "comp6704", "details": "Advanced Topics in Optimization · Week 2" },
-  { "id": "c6704-w3", "date": "2026-09-15", "title": "COMP6704", "start": "18:30", "end": "21:30", "category": "comp6704", "details": "Advanced Topics in Optimization · Week 3" },
-  { "id": "c6001-w3", "date": "2026-09-19", "title": "CMS6001", "start": "09:30", "end": "17:00", "category": "cms6001", "details": "Advanced AI Programming · Week 3 · 午休 12:30–14:00" },
-  { "id": "c6002-w3", "date": "2026-09-20", "title": "CMS6002", "start": "09:30", "end": "17:00", "category": "cms6002", "details": "Frontiers of Artificial Intelligence · Week 3 · 午休 12:30–14:00" },
-  { "id": "c6704-w4", "date": "2026-09-22", "title": "COMP6704", "start": "18:30", "end": "21:30", "category": "comp6704", "details": "Advanced Topics in Optimization · Week 4" },
-  { "id": "holiday-w4", "date": "2026-09-25", "title": "中秋节", "start": "", "end": "", "category": "personal", "details": "Week 4 · 周末课程暂停" },
-  { "id": "c6704-w5", "date": "2026-09-29", "title": "COMP6704", "start": "18:30", "end": "21:30", "category": "comp6704", "details": "Advanced Topics in Optimization · Week 5" },
-  { "id": "c6704-w6", "date": "2026-10-06", "title": "COMP6704", "start": "18:30", "end": "21:30", "category": "comp6704", "details": "Advanced Topics in Optimization · Week 6" },
-  { "id": "c6001-w6", "date": "2026-10-10", "title": "CMS6001", "start": "09:30", "end": "17:00", "category": "cms6001", "details": "Advanced AI Programming · Week 6 · 午休 12:30–14:00" },
-  { "id": "c6002-w6", "date": "2026-10-11", "title": "CMS6002", "start": "09:30", "end": "17:00", "category": "cms6002", "details": "Frontiers of Artificial Intelligence · Week 6 · 午休 12:30–14:00" },
-  { "id": "c6704-w7", "date": "2026-10-13", "title": "COMP6704", "start": "18:30", "end": "21:30", "category": "comp6704", "details": "Advanced Topics in Optimization · Week 7" },
-  { "id": "c6704-w8", "date": "2026-10-20", "title": "COMP6704", "start": "18:30", "end": "21:30", "category": "comp6704", "details": "Advanced Topics in Optimization · Week 8" },
-  { "id": "c6704-w9", "date": "2026-10-27", "title": "COMP6704", "start": "18:30", "end": "21:30", "category": "comp6704", "details": "Advanced Topics in Optimization · Week 9" },
-  { "id": "c6001-w9", "date": "2026-10-31", "title": "CMS6001", "start": "09:30", "end": "17:00", "category": "cms6001", "details": "Advanced AI Programming · Week 9 · 午休 12:30–14:00" },
-  { "id": "c6002-w9", "date": "2026-11-01", "title": "CMS6002", "start": "09:30", "end": "17:00", "category": "cms6002", "details": "Frontiers of Artificial Intelligence · Week 9 · 午休 12:30–14:00" },
-  { "id": "c6704-w10", "date": "2026-11-03", "title": "COMP6704", "start": "18:30", "end": "21:30", "category": "comp6704", "details": "Advanced Topics in Optimization · Week 10" },
-  { "id": "c6704-w11", "date": "2026-11-10", "title": "COMP6704", "start": "18:30", "end": "21:30", "category": "comp6704", "details": "Advanced Topics in Optimization · Week 11" },
-  { "id": "c6704-w12", "date": "2026-11-17", "title": "COMP6704", "start": "18:30", "end": "21:30", "category": "comp6704", "details": "Advanced Topics in Optimization · Week 12" },
-  { "id": "c6001-w12", "date": "2026-11-21", "title": "CMS6001", "start": "09:30", "end": "17:00", "category": "cms6001", "details": "Advanced AI Programming · Week 12 · 午休 12:30–14:00" },
-  { "id": "c6002-w12", "date": "2026-11-22", "title": "CMS6002", "start": "09:30", "end": "17:00", "category": "cms6002", "details": "Frontiers of Artificial Intelligence · Week 12 · 午休 12:30–14:00" },
-  { "id": "c6704-w13", "date": "2026-11-24", "title": "COMP6704", "start": "18:30", "end": "21:30", "category": "comp6704", "details": "Advanced Topics in Optimization · Week 13" }
+  {
+    "id": "c6704-w1",
+    "date": "2026-09-01",
+    "title": "COMP6704",
+    "start": "18:30",
+    "end": "21:30",
+    "category": "comp6704",
+    "details": "Advanced Topics in Optimization · Week 1"
+  },
+  {
+    "id": "c6001-w1",
+    "date": "2026-09-05",
+    "title": "CMS6001",
+    "start": "09:30",
+    "end": "17:00",
+    "category": "cms6001",
+    "details": "Advanced AI Programming · Week 1 · 午休 12:30–14:00"
+  },
+  {
+    "id": "c6002-w1",
+    "date": "2026-09-06",
+    "title": "CMS6002",
+    "start": "09:30",
+    "end": "17:00",
+    "category": "cms6002",
+    "details": "Frontiers of Artificial Intelligence · Week 1 · 午休 12:30–14:00"
+  },
+  {
+    "id": "c6704-w2",
+    "date": "2026-09-08",
+    "title": "COMP6704",
+    "start": "18:30",
+    "end": "21:30",
+    "category": "comp6704",
+    "details": "Advanced Topics in Optimization · Week 2"
+  },
+  {
+    "id": "c6704-w3",
+    "date": "2026-09-15",
+    "title": "COMP6704",
+    "start": "18:30",
+    "end": "21:30",
+    "category": "comp6704",
+    "details": "Advanced Topics in Optimization · Week 3"
+  },
+  {
+    "id": "c6001-w3",
+    "date": "2026-09-19",
+    "title": "CMS6001",
+    "start": "09:30",
+    "end": "17:00",
+    "category": "cms6001",
+    "details": "Advanced AI Programming · Week 3 · 午休 12:30–14:00"
+  },
+  {
+    "id": "c6002-w3",
+    "date": "2026-09-20",
+    "title": "CMS6002",
+    "start": "09:30",
+    "end": "17:00",
+    "category": "cms6002",
+    "details": "Frontiers of Artificial Intelligence · Week 3 · 午休 12:30–14:00"
+  },
+  {
+    "id": "event-1",
+    "date": "2026-09-20",
+    "title": "Pre CMS6002",
+    "start": "09:30",
+    "end": "",
+    "category": "personal",
+    "details": "无"
+  },
+  {
+    "id": "c6704-w4",
+    "date": "2026-09-22",
+    "title": "COMP6704",
+    "start": "18:30",
+    "end": "21:30",
+    "category": "comp6704",
+    "details": "Advanced Topics in Optimization · Week 4"
+  },
+  {
+    "id": "holiday-w4",
+    "date": "2026-09-25",
+    "title": "中秋节",
+    "start": "",
+    "end": "",
+    "category": "personal",
+    "details": "Week 4 · 周末课程暂停"
+  },
+  {
+    "id": "c6704-w5",
+    "date": "2026-09-29",
+    "title": "COMP6704",
+    "start": "18:30",
+    "end": "21:30",
+    "category": "comp6704",
+    "details": "Advanced Topics in Optimization · Week 5"
+  },
+  {
+    "id": "c6704-w6",
+    "date": "2026-10-06",
+    "title": "COMP6704",
+    "start": "18:30",
+    "end": "21:30",
+    "category": "comp6704",
+    "details": "Advanced Topics in Optimization · Week 6"
+  },
+  {
+    "id": "c6001-w6",
+    "date": "2026-10-10",
+    "title": "CMS6001",
+    "start": "09:30",
+    "end": "17:00",
+    "category": "cms6001",
+    "details": "Advanced AI Programming · Week 6 · 午休 12:30–14:00"
+  },
+  {
+    "id": "c6002-w6",
+    "date": "2026-10-11",
+    "title": "CMS6002",
+    "start": "09:30",
+    "end": "17:00",
+    "category": "cms6002",
+    "details": "Frontiers of Artificial Intelligence · Week 6 · 午休 12:30–14:00"
+  },
+  {
+    "id": "c6704-w7",
+    "date": "2026-10-13",
+    "title": "COMP6704",
+    "start": "18:30",
+    "end": "21:30",
+    "category": "comp6704",
+    "details": "Advanced Topics in Optimization · Week 7"
+  },
+  {
+    "id": "c6704-w8",
+    "date": "2026-10-20",
+    "title": "COMP6704",
+    "start": "18:30",
+    "end": "21:30",
+    "category": "comp6704",
+    "details": "Advanced Topics in Optimization · Week 8"
+  },
+  {
+    "id": "c6704-w9",
+    "date": "2026-10-27",
+    "title": "COMP6704",
+    "start": "18:30",
+    "end": "21:30",
+    "category": "comp6704",
+    "details": "Advanced Topics in Optimization · Week 9"
+  },
+  {
+    "id": "c6001-w9",
+    "date": "2026-10-31",
+    "title": "CMS6001",
+    "start": "09:30",
+    "end": "17:00",
+    "category": "cms6001",
+    "details": "Advanced AI Programming · Week 9 · 午休 12:30–14:00"
+  },
+  {
+    "id": "c6002-w9",
+    "date": "2026-11-01",
+    "title": "CMS6002",
+    "start": "09:30",
+    "end": "17:00",
+    "category": "cms6002",
+    "details": "Frontiers of Artificial Intelligence · Week 9 · 午休 12:30–14:00"
+  },
+  {
+    "id": "c6704-w10",
+    "date": "2026-11-03",
+    "title": "COMP6704",
+    "start": "18:30",
+    "end": "21:30",
+    "category": "comp6704",
+    "details": "Advanced Topics in Optimization · Week 10"
+  },
+  {
+    "id": "c6704-w11",
+    "date": "2026-11-10",
+    "title": "COMP6704",
+    "start": "18:30",
+    "end": "21:30",
+    "category": "comp6704",
+    "details": "Advanced Topics in Optimization · Week 11"
+  },
+  {
+    "id": "c6704-w12",
+    "date": "2026-11-17",
+    "title": "COMP6704",
+    "start": "18:30",
+    "end": "21:30",
+    "category": "comp6704",
+    "details": "Advanced Topics in Optimization · Week 12"
+  },
+  {
+    "id": "c6001-w12",
+    "date": "2026-11-21",
+    "title": "CMS6001",
+    "start": "09:30",
+    "end": "17:00",
+    "category": "cms6001",
+    "details": "Advanced AI Programming · Week 12 · 午休 12:30–14:00"
+  },
+  {
+    "id": "c6002-w12",
+    "date": "2026-11-22",
+    "title": "CMS6002",
+    "start": "09:30",
+    "end": "17:00",
+    "category": "cms6002",
+    "details": "Frontiers of Artificial Intelligence · Week 12 · 午休 12:30–14:00"
+  },
+  {
+    "id": "c6704-w13",
+    "date": "2026-11-24",
+    "title": "COMP6704",
+    "start": "18:30",
+    "end": "21:30",
+    "category": "comp6704",
+    "details": "Advanced Topics in Optimization · Week 13"
+  }
 ]

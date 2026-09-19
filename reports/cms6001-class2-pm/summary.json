@@ -1,0 +1,44 @@
+{
+  "dataset": {
+    "samples": 569,
+    "features": 30,
+    "missing_cells": 0,
+    "duplicate_feature_rows": 0
+  },
+  "versions": {
+    "python": "3.11.15",
+    "numpy": "2.4.6",
+    "pandas": "3.0.6",
+    "scikit_learn": "1.9.1",
+    "umap_learn": "0.5.12",
+    "hdbscan": "0.8.44"
+  },
+  "seed": 42,
+  "baseline": {
+    "pca_variance_2d": 0.6324320765155944,
+    "clusters": 3,
+    "hdbscan_noise_n": 12,
+    "hdbscan_coverage": 0.9789103690685413,
+    "isolation_forest_anomaly_n": 29,
+    "noise_and_anomaly_n": 0,
+    "noise_only_n": 12,
+    "anomaly_only_n": 29,
+    "overlap_jaccard": 0.0
+  },
+  "projection_metrics": [
+    {
+      "method": "PCA 2D",
+      "trustworthiness_15": 0.8776745613300974,
+      "neighbor_recall_15": 0.30404217926186294
+    },
+    {
+      "method": "UMAP 2D",
+      "trustworthiness_15": 0.9231990231990232,
+      "neighbor_recall_15": 0.4357352079671939
+    }
+  ],
+  "seed_pairwise_ari_median": 0.9819760998986784,
+  "seed_pairwise_ari_min": 0.9670276335049001,
+  "seed_pairwise_ari_max": 0.99044216949524,
+  "figure": "required_three_charts.png"
+}

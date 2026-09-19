@@ -1,0 +1,206 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%238f1838'/%3E%3Ctext x='32' y='43' text-anchor='middle' font-size='34' fill='white'%3E%E7%90%86%3C/text%3E%3C/svg%3E">
+  <meta name="description" content="A reproducible comparison of PCA, UMAP, HDBSCAN and Isolation Forest on the Wisconsin Diagnostic Breast Cancer dataset.">
+  <title>Structure is visible; its meaning is conditional | CMS6001 research note</title>
+  <style>
+    :root {
+      --ink: #17233b;
+      --muted: #5c6778;
+      --paper: #f8f7f4;
+      --white: #ffffff;
+      --line: #dcdedc;
+      --accent: #8f1838;
+      --accent-soft: #f6e9ed;
+      --teal: #155e75;
+      --teal-soft: #e9f2f3;
+      --serif: Georgia, "Times New Roman", serif;
+      --sans: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { margin: 0; color: var(--ink); background: var(--paper); font: 16px/1.65 var(--sans); }
+    a { color: var(--accent); text-underline-offset: .18em; }
+    a:hover { color: #621127; }
+    a:focus-visible { outline: 3px solid var(--teal); outline-offset: 3px; }
+    .shell { width: min(1120px, calc(100% - 44px)); margin-inline: auto; }
+    .topbar { border-bottom: 1px solid var(--line); background: rgba(255,255,255,.86); }
+    .topbar-inner { min-height: 68px; display: flex; align-items: center; justify-content: space-between; gap: 24px; }
+    .brand { display: flex; align-items: center; gap: 11px; text-decoration: none; color: var(--ink); font-weight: 760; letter-spacing: -.025em; }
+    .brand-mark { display: grid; place-items: center; width: 34px; height: 34px; color: #fff; background: var(--accent); font: 700 17px var(--serif); border-radius: 6px; }
+    .back-link { color: var(--muted); font-size: .82rem; white-space: nowrap; }
+    .hero { padding: 68px 0 57px; border-bottom: 1px solid var(--line); }
+    .eyebrow { margin: 0 0 17px; color: var(--accent); font-size: .72rem; font-weight: 800; letter-spacing: .15em; text-transform: uppercase; }
+    h1, h2, h3, p { margin-top: 0; }
+    h1 { max-width: 900px; margin-bottom: 22px; font: 700 clamp(2.65rem, 6.2vw, 5.55rem)/1.04 var(--serif); letter-spacing: -.055em; }
+    .dek { max-width: 850px; margin-bottom: 0; color: #3c4859; font-size: clamp(1.08rem, 1.7vw, 1.34rem); line-height: 1.56; }
+    .hero-meta { display: flex; flex-wrap: wrap; gap: 9px 20px; margin-top: 30px; color: var(--muted); font-size: .78rem; }
+    .hero-meta span + span::before { content: "·"; margin-right: 20px; color: #9ca3ac; }
+    .key-finding { margin: 42px 0 0; padding: 27px 30px 29px; background: var(--white); border-left: 5px solid var(--accent); box-shadow: 0 6px 22px #17233b08; }
+    .key-finding .label { display: block; color: var(--accent); font-size: .7rem; font-weight: 800; text-transform: uppercase; letter-spacing: .15em; margin-bottom: 8px; }
+    .key-finding p { max-width: 950px; margin: 0; font: 500 clamp(1.2rem, 2vw, 1.55rem)/1.48 var(--serif); }
+    .section { padding: 54px 0; border-bottom: 1px solid var(--line); }
+    .section-head { display: grid; grid-template-columns: 210px 1fr; gap: 28px; margin-bottom: 22px; }
+    .section-index { padding-top: 5px; color: var(--accent); font-size: .72rem; font-weight: 800; letter-spacing: .13em; text-transform: uppercase; }
+    h2 { margin-bottom: 0; font: 700 clamp(1.65rem, 3.1vw, 2.35rem)/1.16 var(--serif); letter-spacing: -.035em; }
+    h3 { font-size: 1rem; line-height: 1.4; }
+    .section-body { margin-left: 238px; max-width: 750px; }
+    .section-body p { margin-bottom: 14px; }
+    .section-body p:last-child { margin-bottom: 0; }
+    .figure-block { margin: 28px 0 0; background: #fff; border: 1px solid var(--line); }
+    .figure-scroll { overflow-x: auto; }
+    .figure-scroll img { display: block; width: 100%; min-width: 890px; height: auto; }
+    figcaption { padding: 14px 20px 17px; border-top: 1px solid var(--line); color: var(--muted); font-size: .82rem; }
+    .caption-title { color: var(--ink); font-weight: 700; }
+    .figure-link { display: inline-block; margin-left: 8px; white-space: nowrap; }
+    .measurements { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; margin: 24px 0 18px; border: 1px solid var(--line); background: var(--line); }
+    .measure { min-height: 112px; padding: 19px 23px; background: #fff; }
+    .measure strong { display: block; font: 700 2.2rem/1.12 var(--serif); letter-spacing: -.04em; }
+    .measure span { display: block; margin-top: 7px; color: var(--muted); font-size: .82rem; line-height: 1.4; }
+    .measure em { color: var(--teal); font-style: normal; }
+    .table-wrap { overflow-x: auto; margin: 23px 0; }
+    table { width: 100%; border-collapse: collapse; min-width: 530px; font-size: .87rem; font-variant-numeric: tabular-nums; }
+    th, td { padding: 12px 13px; border-bottom: 1px solid var(--line); text-align: left; vertical-align: top; }
+    thead th { background: #edf0f1; color: #435061; font-size: .72rem; text-transform: uppercase; letter-spacing: .07em; }
+    tbody tr:last-child td { border-bottom: 0; }
+    .number { text-align: right; }
+    .callout { padding: 20px 24px; background: var(--teal-soft); border-left: 3px solid var(--teal); }
+    .callout p { margin: 0; }
+    .methods-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px 32px; margin-top: 23px; }
+    .method { padding-top: 12px; border-top: 2px solid var(--line); }
+    .method h3 { margin-bottom: 5px; }
+    .method p { margin: 0; color: var(--muted); font-size: .88rem; }
+    .refs { padding: 48px 0 70px; }
+    .refs h2 { margin-bottom: 16px; font-size: 1.55rem; }
+    .refs ul { margin: 0; padding-left: 19px; color: var(--muted); font-size: .86rem; }
+    .refs li { margin-bottom: 5px; }
+    footer { padding: 21px 0 27px; border-top: 1px solid var(--line); color: var(--muted); font-size: .74rem; }
+    footer .shell { display: flex; justify-content: space-between; gap: 16px; }
+    @media (max-width: 760px) {
+      .hero { padding: 49px 0 43px; }
+      .hero-meta span + span::before { display: none; }
+      .section { padding: 40px 0; }
+      .section-head { display: block; }
+      .section-index { display: block; margin-bottom: 12px; }
+      .section-body { margin-left: 0; }
+      .methods-grid { grid-template-columns: 1fr; }
+      .figure-scroll img { min-width: 850px; }
+    }
+    @media (max-width: 520px) {
+      .shell { width: min(100% - 30px, 1120px); }
+      .back-link { font-size: .75rem; }
+      h1 { font-size: 2.65rem; }
+      .key-finding { padding: 21px; }
+      .measurements { grid-template-columns: 1fr 1fr; }
+      .measure { padding: 14px; min-height: 94px; }
+      .measure strong { font-size: 1.75rem; }
+      .measure span { font-size: .73rem; }
+      footer .shell { display: block; }
+    }
+    @media print {
+      body { background: #fff; color: #000; }
+      .topbar, .figure-link { display: none; }
+      .shell { width: 100%; }
+      .hero { padding-top: 20px; }
+      .section { break-inside: avoid; }
+      .figure-scroll { overflow: visible; }
+      .figure-scroll img { min-width: 0; }
+      a { color: inherit; }
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="shell topbar-inner">
+      <a class="brand" href="../../" aria-label="Return to the PolyU Semester 1 calendar"><span class="brand-mark" aria-hidden="true">理</span><span>PolyU · CMS6001</span></a>
+      <a class="back-link" href="../../">← Semester 1 calendar</a>
+    </div>
+  </header>
+
+  <main class="shell">
+    <article>
+      <header class="hero">
+        <p class="eyebrow">Research note / Class 2 PM / Unsupervised learning</p>
+        <h1>Structure is visible.<br>Its meaning is conditional.</h1>
+        <p class="dek">UMAP preserved more local neighborhoods than PCA and revealed three stable two-dimensional clusters. Yet the same density-clustering settings found no clusters in the original feature space. The representation, not just the algorithm, determines the story.</p>
+        <div class="hero-meta"><span>Wisconsin Diagnostic Breast Cancer data</span><span>569 samples · 30 features</span><span>19 September 2026</span></div>
+        <div class="key-finding" role="note">
+          <span class="label">Conclusion in one sentence</span>
+          <p>The two-dimensional map is useful for exploration, but its clusters should not be treated as validated biological subtypes; the two anomaly methods also identified entirely different samples.</p>
+        </div>
+      </header>
+
+      <section class="section" id="visual-results" aria-labelledby="visual-title">
+        <div class="section-head"><span class="section-index">01 / Visual results</span><h2 id="visual-title">Three views of the same 569 samples</h2></div>
+        <div class="section-body"><p>The PCA panel shows a linear projection. HDBSCAN colors the UMAP projection by cluster, with gray points left unassigned. Isolation Forest was fitted on the original standardized 30-dimensional features; its red flags are shown on the UMAP map only for comparison.</p></div>
+        <figure class="figure-block">
+          <div class="figure-scroll"><img src="required_three_charts.png" width="3040" height="912" alt="Three scatter plots: a broad PCA cloud; a UMAP projection separated into three colored HDBSCAN clusters; and 29 red Isolation Forest anomalies overlaid on the UMAP projection."></div>
+          <figcaption><span class="caption-title">Figure 1.</span> The assignment's three required views. On a narrow screen, scroll the image horizontally. <a class="figure-link" href="required_three_charts.png" target="_blank" rel="noopener">Open full-size figure ↗</a></figcaption>
+        </figure>
+      </section>
+
+      <section class="section" id="neighborhoods" aria-labelledby="neighborhoods-title">
+        <div class="section-head"><span class="section-index">02 / Projection quality</span><h2 id="neighborhoods-title">UMAP retained more of the local neighborhood</h2></div>
+        <div class="section-body">
+          <p>The first two PCA components explained 63.24% of standardized feature variance. That is useful, but explained variance asks a different question from whether nearby samples remain nearby after projection. With 15-neighbor evaluation, UMAP scored higher on both local-structure measures.</p>
+          <div class="table-wrap"><table><thead><tr><th scope="col">Two-dimensional method</th><th scope="col" class="number">Trustworthiness ↑</th><th scope="col" class="number">15-neighbor recall ↑</th></tr></thead><tbody><tr><td>PCA</td><td class="number">0.8777</td><td class="number">0.3040</td></tr><tr><td>UMAP</td><td class="number"><strong>0.9232</strong></td><td class="number"><strong>0.4357</strong></td></tr></tbody></table></div>
+          <p>These measures support a local-neighborhood claim. They do not establish a correct cluster count or preserve global distances in the plot.</p>
+        </div>
+      </section>
+
+      <section class="section" id="clusters" aria-labelledby="clusters-title">
+        <div class="section-head"><span class="section-index">03 / Density clustering</span><h2 id="clusters-title">Three clusters were stable, but only in this representation</h2></div>
+        <div class="section-body">
+          <div class="measurements" aria-label="Key clustering measurements">
+            <div class="measure"><strong>3</strong><span>HDBSCAN clusters on 2D UMAP</span></div>
+            <div class="measure"><strong>12</strong><span>unassigned points (2.1%)</span></div>
+            <div class="measure"><strong>0.982</strong><span>median pairwise ARI across five UMAP seeds</span></div>
+            <div class="measure"><strong><em>100%</em></strong><span>marked as noise in both 30D original and 10D PCA spaces, under the same HDBSCAN setting</span></div>
+          </div>
+          <p>Five fixed-parameter UMAP runs all produced three clusters; pairwise adjusted Rand indices ranged from 0.967 to 0.990. A one-at-a-time parameter check also retained three clusters, although assignment and noise rates moved. Increasing <code>min_cluster_size</code> to 20 raised the noise rate to 10.0% and reduced agreement with the baseline to ARI 0.833.</p>
+          <div class="callout"><p><strong>Interpretation.</strong> Stability to random initialization is reassuring, but it does not remove dependence on the feature representation. HDBSCAN labeled every point as noise in standardized 30D and PCA 10D spaces with the same settings. This does not prove that the original data lack structure: density estimation changes with dimensionality, and those settings may be unsuitable there.</p></div>
+        </div>
+      </section>
+
+      <section class="section" id="anomalies" aria-labelledby="anomalies-title">
+        <div class="section-head"><span class="section-index">04 / Anomaly detection</span><h2 id="anomalies-title">The two anomaly definitions did not overlap</h2></div>
+        <div class="section-body">
+          <p>Isolation Forest, fitted to the original standardized features with <code>contamination=0.05</code>, flagged 29 samples. None of them was among HDBSCAN's 12 unassigned UMAP points: the observed intersection was <strong>0</strong>. The contamination setting fixes a decision threshold; it is not an estimate of a real-world anomaly rate.</p>
+          <p>HDBSCAN noise means weak membership in a density cluster in the chosen two-dimensional embedding. Isolation Forest flags samples that are comparatively easy to isolate through splits of the original features. Their disagreement is a result to explain, not an error to hide.</p>
+        </div>
+      </section>
+
+      <section class="section" id="methods" aria-labelledby="methods-title">
+        <div class="section-head"><span class="section-index">05 / Methods &amp; scope</span><h2 id="methods-title">A label-blind exploratory analysis</h2></div>
+        <div class="section-body">
+          <p>All models used the 30 numerical measurements only. The diagnosis field was withheld until modeling and sensitivity checks were complete. The full dataset was standardized feature by feature; no held-out test set was used because this study describes structure within the observed dataset, rather than out-of-sample prediction.</p>
+          <div class="methods-grid">
+            <div class="method"><h3>Projection</h3><p>PCA: 2 components. UMAP: 2 components, 15 neighbors, minimum distance 0.1; seed 42.</p></div>
+            <div class="method"><h3>Clustering</h3><p>HDBSCAN: minimum cluster size 10 on the 2D UMAP embedding; comparison runs on 30D and PCA 10D.</p></div>
+            <div class="method"><h3>Anomaly scoring</h3><p>Isolation Forest: contamination 0.05 on the original standardized features; seed 42.</p></div>
+            <div class="method"><h3>Robustness</h3><p>Five UMAP seeds; one-at-a-time checks for UMAP neighborhood and distance settings and HDBSCAN minimum cluster size.</p></div>
+          </div>
+          <p style="margin-top:23px">Post hoc, the large UMAP cluster contained 353 benign and 28 malignant samples; the other two clusters contained 57/59 and 117/117 malignant samples. This association is descriptive. <strong>Malignancy is not an anomaly ground truth</strong>, and these in-sample counts are not clinical performance estimates.</p>
+          <p>Reproduction environment: Python 3.11.15; NumPy 2.4.6; pandas 3.0.6; scikit-learn 1.9.1; umap-learn 0.5.12; hdbscan 0.8.44. <a href="summary.json">Download the machine-readable result summary</a>.</p>
+        </div>
+      </section>
+
+      <section class="refs" aria-labelledby="refs-title">
+        <h2 id="refs-title">Sources and interpretation notes</h2>
+        <ul>
+          <li><a href="https://archive.ics.uci.edu/dataset/17/breast+cancer+wisconsin+diagnostic">UCI Machine Learning Repository — Wisconsin Diagnostic Breast Cancer data</a></li>
+          <li><a href="https://umap-learn.readthedocs.io/en/latest/clustering.html">UMAP documentation — using UMAP for clustering and its density caveats</a></li>
+          <li><a href="https://scikit-learn.org/stable/modules/generated/sklearn.manifold.trustworthiness.html">scikit-learn — trustworthiness metric</a></li>
+          <li><a href="https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.IsolationForest.html">scikit-learn — Isolation Forest and the contamination threshold</a></li>
+        </ul>
+      </section>
+    </article>
+  </main>
+
+  <footer><div class="shell"><span>CMS6001 · Advanced AI Programming · Class 2 PM</span><span>Exploratory research note · Not a clinical diagnostic tool</span></div></footer>
+</body>
+</html>

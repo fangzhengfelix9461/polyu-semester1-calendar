@@ -52,6 +52,7 @@
     .section-body p { margin-bottom: 14px; }
     .section-body p:last-child { margin-bottom: 0; }
     .figure-block { margin: 28px 0 0; background: #fff; border: 1px solid var(--line); }
+    .section-body .figure-block { width: calc(100% + 238px); margin-left: -238px; }
     .figure-scroll { overflow-x: auto; }
     .figure-scroll img { display: block; width: 100%; min-width: 890px; height: auto; }
     figcaption { padding: 14px 20px 17px; border-top: 1px solid var(--line); color: var(--muted); font-size: .82rem; }
@@ -87,6 +88,7 @@
       .section-head { display: block; }
       .section-index { display: block; margin-bottom: 12px; }
       .section-body { margin-left: 0; }
+      .section-body .figure-block { width: 100%; margin-left: 0; }
       .methods-grid { grid-template-columns: 1fr; }
       .figure-scroll img { min-width: 850px; }
     }
@@ -147,6 +149,10 @@
         <div class="section-head"><span class="section-index">02 / Projection quality</span><h2 id="neighborhoods-title">UMAP retained more of the local neighborhood</h2></div>
         <div class="section-body">
           <p>The first two PCA components explained 63.24% of standardized feature variance. That is useful, but explained variance asks a different question from whether nearby samples remain nearby after projection. With 15-neighbor evaluation, UMAP scored higher on both local-structure measures.</p>
+          <figure class="figure-block">
+            <div class="figure-scroll"><img src="baseline_projection_comparison.png" width="2713" height="1023" alt="Side-by-side scatter plots of the same 569 unlabeled samples. The PCA baseline is a compact overlapping cloud; the UMAP projection spreads local neighborhoods into a more articulated shape. Trustworthiness and neighbor recall are printed beneath each plot."></div>
+            <figcaption><span class="caption-title">Figure 2.</span> A dedicated, label-blind comparison of the linear PCA baseline and nonlinear UMAP projection. Both use the same standardized samples. <a class="figure-link" href="baseline_projection_comparison.png" target="_blank" rel="noopener">Open full-size figure ↗</a></figcaption>
+          </figure>
           <div class="table-wrap"><table><thead><tr><th scope="col">Two-dimensional method</th><th scope="col" class="number">Trustworthiness ↑</th><th scope="col" class="number">15-neighbor recall ↑</th></tr></thead><tbody><tr><td>PCA</td><td class="number">0.8777</td><td class="number">0.3040</td></tr><tr><td>UMAP</td><td class="number"><strong>0.9232</strong></td><td class="number"><strong>0.4357</strong></td></tr></tbody></table></div>
           <p>These measures support a local-neighborhood claim. They do not establish a correct cluster count or preserve global distances in the plot.</p>
         </div>

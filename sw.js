@@ -1,7 +1,7 @@
-const CACHE = "semester1-v2";
+const CACHE = "semester1-v3-20261017";
 const ASSETS = ["./", "index.html", "styles.css", "app.js", "config.js", "events.json", "ra-events.json", "manifest.webmanifest"];
-self.addEventListener("install", event => event.waitUntil(caches.open(CACHE).then(cache => cache.addAll(ASSETS))));
-self.addEventListener("activate", event => event.waitUntil(caches.keys().then(keys => Promise.all(keys.filter(key => key !== CACHE).map(key => caches.delete(key))))));
+self.addEventListener("install", event => event.waitUntil(caches.open(CACHE).then(cache => cache.addAll(ASSETS)).then(() => self.skipWaiting())));
+self.addEventListener("activate", event => event.waitUntil(caches.keys().then(keys => Promise.all(keys.filter(key => key.startsWith("semester1-") && key !== CACHE).map(key => caches.delete(key)))).then(() => self.clients.claim())));
 self.addEventListener("fetch", event => {
   const url = new URL(event.request.url);
   if (url.pathname.endsWith("events.json") || url.pathname.endsWith("ra-events.json")) {

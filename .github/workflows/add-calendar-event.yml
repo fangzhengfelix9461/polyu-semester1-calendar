@@ -29,7 +29,11 @@ jobs:
             const categoryMap = { '个人': 'personal', '截止日期': 'deadline', '学习': 'study' };
             const category = categoryMap[read('分类')] || 'personal';
             const notes = read('备注') === '_No response_' ? '' : read('备注');
-            if (!title || !/^2026-\d{2}-\d{2}$/.test(date)) core.setFailed('事件名称或日期格式无效');
+            const parsedDate = new Date(`${date}T00:00:00Z`);
+            if (!title || !/^202[67]-\d{2}-\d{2}$/.test(date) || Number.isNaN(parsedDate.getTime()) || parsedDate.toISOString().slice(0, 10) !== date) {
+              core.setFailed('事件名称或日期格式无效');
+              return;
+            }
             const time = value => value === '全天' ? '' : (/^\d{2}:\d{2}$/.test(value) ? value : '');
             const events = JSON.parse(fs.readFileSync('events.json', 'utf8'));
             events.push({ id: `event-${context.payload.issue.number}`, date, title, start: time(rawStart), end: time(rawEnd), category, details: notes });

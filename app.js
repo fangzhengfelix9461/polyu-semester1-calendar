@@ -46,6 +46,8 @@
 
   function render() {
     el("monthTitle").textContent = monthName();
+    el("courseCount").textContent = events.filter(e => ["cms6001", "cms6002", "comp6704"].includes(e.category)).length;
+    el("raCount").textContent = events.filter(e => e.category === "eduhk").length;
     renderMonth();
     renderAgenda();
   }
@@ -120,7 +122,7 @@
 
   async function syncEvents() {
     const status = el("syncStatus");
-    const hosted = location.protocol.startsWith("http") && location.hostname.endsWith("github.io");
+    const hosted = location.protocol.startsWith("http");
     const stamp = Date.now();
     const baseUrl = hosted ? `events.json?t=${stamp}` : `https://raw.githubusercontent.com/${CONFIG.owner}/${CONFIG.repo}/${CONFIG.branch}/events.json?t=${stamp}`;
     const raUrl = hosted ? `ra-events.json?t=${stamp}` : `https://raw.githubusercontent.com/${CONFIG.owner}/${CONFIG.repo}/${CONFIG.branch}/ra-events.json?t=${stamp}`;

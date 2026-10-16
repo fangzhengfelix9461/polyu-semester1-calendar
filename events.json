@@ -171,6 +171,15 @@
     "details": "Advanced AI Programming · Week 9 · 午休 12:30–14:00"
   },
   {
+    "id": "marathon-20261101",
+    "date": "2026-11-01",
+    "title": "常州西太湖马拉松",
+    "start": "",
+    "end": "",
+    "category": "personal",
+    "details": "江苏常州 · 马拉松 · 日期按个人计划录入，起跑时间待确认"
+  },
+  {
     "id": "c6002-w9",
     "date": "2026-11-01",
     "title": "CMS6002",
@@ -196,6 +205,15 @@
     "end": "21:30",
     "category": "comp6704",
     "details": "Advanced Topics in Optimization · Week 11"
+  },
+  {
+    "id": "marathon-20261115",
+    "date": "2026-11-15",
+    "title": "桂林马拉松",
+    "start": "",
+    "end": "",
+    "category": "personal",
+    "details": "广西桂林 · 马拉松 · 日期按个人计划录入，起跑时间待确认"
   },
   {
     "id": "c6704-w12",
@@ -232,5 +250,41 @@
     "end": "21:30",
     "category": "comp6704",
     "details": "Advanced Topics in Optimization · Week 13"
+  },
+  {
+    "id": "marathon-20261129",
+    "date": "2026-11-29",
+    "title": "梵净山马拉松",
+    "start": "",
+    "end": "",
+    "category": "personal",
+    "details": "贵州铜仁 · 马拉松 · 日期按个人计划录入，起跑时间待确认"
+  },
+  {
+    "id": "marathon-20261206",
+    "date": "2026-12-06",
+    "title": "深圳马拉松",
+    "start": "",
+    "end": "",
+    "category": "personal",
+    "details": "广东深圳 · 马拉松 · 日期按个人计划录入，起跑时间待确认"
+  },
+  {
+    "id": "marathon-20261220",
+    "date": "2026-12-20",
+    "title": "江门马拉松",
+    "start": "",
+    "end": "",
+    "category": "personal",
+    "details": "广东江门 · 马拉松 · 日期按个人计划录入，起跑时间待确认"
+  },
+  {
+    "id": "marathon-20270103",
+    "date": "2027-01-03",
+    "title": "顺德荣桂马拉松",
+    "start": "",
+    "end": "",
+    "category": "personal",
+    "details": "广东佛山顺德 · 马拉松 · 日期按个人计划录入，起跑时间待确认"
   }
 ]

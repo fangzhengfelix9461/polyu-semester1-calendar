@@ -153,6 +153,24 @@
     "details": "Advanced Topics in Optimization · Week 8"
   },
   {
+    "id": "tutorial-20261023",
+    "date": "2026-10-23",
+    "title": "Tutorial",
+    "start": "15:30",
+    "end": "17:30",
+    "category": "study",
+    "details": "地点待定"
+  },
+  {
+    "id": "tutorial-20261026",
+    "date": "2026-10-26",
+    "title": "Tutorial",
+    "start": "15:30",
+    "end": "17:30",
+    "category": "study",
+    "details": "地点待定"
+  },
+  {
     "id": "c6704-w9",
     "date": "2026-10-27",
     "title": "COMP6704",
@@ -160,6 +178,15 @@
     "end": "21:30",
     "category": "comp6704",
     "details": "Advanced Topics in Optimization · Week 9"
+  },
+  {
+    "id": "tutorial-20261028",
+    "date": "2026-10-28",
+    "title": "Tutorial",
+    "start": "15:30",
+    "end": "17:30",
+    "category": "study",
+    "details": "地点待定"
   },
   {
     "id": "c6001-w9",
@@ -198,6 +225,15 @@
     "details": "Advanced Topics in Optimization · Week 10"
   },
   {
+    "id": "tutorial-20261106",
+    "date": "2026-11-06",
+    "title": "Tutorial",
+    "start": "15:30",
+    "end": "17:30",
+    "category": "study",
+    "details": "地点待定"
+  },
+  {
     "id": "c6704-w11",
     "date": "2026-11-10",
     "title": "COMP6704",
@@ -205,6 +241,15 @@
     "end": "21:30",
     "category": "comp6704",
     "details": "Advanced Topics in Optimization · Week 11"
+  },
+  {
+    "id": "tutorial-20261113",
+    "date": "2026-11-13",
+    "title": "Tutorial",
+    "start": "15:30",
+    "end": "17:30",
+    "category": "study",
+    "details": "地点待定"
   },
   {
     "id": "marathon-20261115",
